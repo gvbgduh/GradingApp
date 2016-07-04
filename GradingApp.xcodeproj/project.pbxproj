@@ -13,6 +13,9 @@
 		7ADB84161D2B11FE000FDD54 /* GradingApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7ADB84141D2B11FE000FDD54 /* GradingApp.xcdatamodeld */; };
 		7ADB84181D2B11FE000FDD54 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7ADB84171D2B11FE000FDD54 /* Assets.xcassets */; };
 		7ADB841B1D2B11FE000FDD54 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7ADB84191D2B11FE000FDD54 /* LaunchScreen.storyboard */; };
+		7ADB84231D2B1381000FDD54 /* ClassesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADB84221D2B1381000FDD54 /* ClassesTableViewController.swift */; };
+		7ADB84271D2B1555000FDD54 /* GradingClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADB84261D2B1555000FDD54 /* GradingClass.swift */; };
+		7ADB84291D2B1602000FDD54 /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADB84281D2B1602000FDD54 /* Student.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		7ADB84171D2B11FE000FDD54 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7ADB841A1D2B11FE000FDD54 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7ADB841C1D2B11FE000FDD54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7ADB84221D2B1381000FDD54 /* ClassesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassesTableViewController.swift; sourceTree = "<group>"; };
+		7ADB84261D2B1555000FDD54 /* GradingClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradingClass.swift; sourceTree = "<group>"; };
+		7ADB84281D2B1602000FDD54 /* Student.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +69,9 @@
 				7ADB84191D2B11FE000FDD54 /* LaunchScreen.storyboard */,
 				7ADB841C1D2B11FE000FDD54 /* Info.plist */,
 				7ADB84141D2B11FE000FDD54 /* GradingApp.xcdatamodeld */,
+				7ADB84221D2B1381000FDD54 /* ClassesTableViewController.swift */,
+				7ADB84261D2B1555000FDD54 /* GradingClass.swift */,
+				7ADB84281D2B1602000FDD54 /* Student.swift */,
 			);
 			path = GradingApp;
 			sourceTree = "<group>";
@@ -138,9 +147,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7ADB84231D2B1381000FDD54 /* ClassesTableViewController.swift in Sources */,
+				7ADB84291D2B1602000FDD54 /* Student.swift in Sources */,
 				7ADB84161D2B11FE000FDD54 /* GradingApp.xcdatamodeld in Sources */,
 				7ADB84101D2B11FE000FDD54 /* ViewController.swift in Sources */,
 				7ADB840E1D2B11FE000FDD54 /* AppDelegate.swift in Sources */,
+				7ADB84271D2B1555000FDD54 /* GradingClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

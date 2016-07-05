@@ -11,6 +11,7 @@ import UIKit
 class MarksTableViewController: UITableViewController {
     
     var marks:[Mark] = []
+    var studentName = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +21,8 @@ class MarksTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        title = studentName
     }
 
     override func didReceiveMemoryWarning() {

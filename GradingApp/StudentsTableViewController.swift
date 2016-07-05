@@ -11,6 +11,7 @@ import UIKit
 class StudentsTableViewController: UITableViewController {
     
     var students: [Student] = []
+    var className = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +21,10 @@ class StudentsTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        // Remove the title of the back button
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+        title = className
     }
 
     override func didReceiveMemoryWarning() {
@@ -94,6 +99,7 @@ class StudentsTableViewController: UITableViewController {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let destinationController = segue.destinationViewController as! MarksTableViewController
                 destinationController.marks = students[indexPath.row].marks as! [Mark]
+                destinationController.studentName = "\(students[indexPath.row].firstName) \(students[indexPath.row].lastName)"
             }
         }
     }

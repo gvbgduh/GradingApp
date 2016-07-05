@@ -22,7 +22,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
-        <!--Classes Table View Controller-->
+        <!--Classes' grading-->
         <scene sceneID="CsJ-ZW-eFa">
             <objects>
                 <tableViewController id="beZ-HL-KpU" customClass="ClassesTableViewController" customModule="GradingApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -48,7 +48,7 @@
                             <outlet property="delegate" destination="beZ-HL-KpU" id="7O6-XR-hVP"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="FNN-3J-Ptq"/>
+                    <navigationItem key="navigationItem" title="Classes' grading" id="FNN-3J-Ptq"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N1H-1b-QRW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -118,9 +118,12 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="edX-hZ-QHD" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="p8J-cQ-U7H">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="p8J-cQ-U7H">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

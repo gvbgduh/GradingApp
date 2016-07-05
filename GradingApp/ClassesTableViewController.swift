@@ -93,6 +93,9 @@ class ClassesTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        // Remove the title of the back button
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -167,6 +170,7 @@ class ClassesTableViewController: UITableViewController {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let destinationController = segue.destinationViewController as! StudentsTableViewController
                 destinationController.students = classes[indexPath.row].students as! [Student]
+                destinationController.className = classes[indexPath.row].name
             }
         }
     }

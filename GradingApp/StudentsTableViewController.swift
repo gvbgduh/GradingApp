@@ -12,6 +12,8 @@ class StudentsTableViewController: UITableViewController {
     
     var students: [Student] = []
     var className = ""
+    
+    @IBAction func unwindToHomeScreen(segue:UIStoryboardSegue) {}
 
     override func viewDidLoad() {
         super.viewDidLoad()

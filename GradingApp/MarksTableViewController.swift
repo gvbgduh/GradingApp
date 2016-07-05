@@ -12,6 +12,8 @@ class MarksTableViewController: UITableViewController {
     
     var marks:[Mark] = []
     var studentName = ""
+    
+    @IBAction func unwindToHomeScreen(segue:UIStoryboardSegue) {}
 
     override func viewDidLoad() {
         super.viewDidLoad()

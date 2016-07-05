@@ -12,7 +12,7 @@ class GradingClass {
     var name = ""
     var students = []
     
-    init(name: String, students: Array<Student>) {
+    init(name: String, students: [Student]) {
         self.name = name
         self.students = students
     }

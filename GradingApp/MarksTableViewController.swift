@@ -10,7 +10,7 @@ import UIKit
 
 class MarksTableViewController: UITableViewController {
     
-    var marks = []
+    var marks:[Mark] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,9 +43,8 @@ class MarksTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("MarkCell", forIndexPath: indexPath)
 
         // Configure the cell...
-        if let mark = marks[indexPath.row] as? Mark {
-            cell.textLabel?.text = "Subject - \(mark.subject): \(mark.mark)"
-        }
+        let mark = marks[indexPath.row]
+        cell.textLabel?.text = "Subject - \(mark.subject): \(mark.mark)"
 
         return cell
     }
@@ -58,17 +57,16 @@ class MarksTableViewController: UITableViewController {
     }
     */
 
-    /*
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Delete the row from the data source
+            marks.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
 
     /*
     // Override to support rearranging the table view.

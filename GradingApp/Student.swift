@@ -13,7 +13,7 @@ class Student {
     var lastName = ""
     var marks = []
     
-    init(firstName:String, lastName:String, marks:Array<Mark>) {
+    init(firstName:String, lastName:String, marks:[Mark]) {
         self.firstName = firstName
         self.lastName = lastName
         self.marks = marks

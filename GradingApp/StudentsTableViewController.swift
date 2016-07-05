@@ -10,7 +10,7 @@ import UIKit
 
 class StudentsTableViewController: UITableViewController {
     
-    var students = []
+    var students: [Student] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,9 +44,8 @@ class StudentsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath)
 
         // Configure the cell...
-        if let student = students[indexPath.row] as? Student {
-            cell.textLabel?.text = "Student: \(student.firstName) \(student.lastName)"
-        }
+        let student = students[indexPath.row]
+        cell.textLabel?.text = "Student: \(student.firstName) \(student.lastName)"
 
         return cell
     }
@@ -59,17 +58,16 @@ class StudentsTableViewController: UITableViewController {
     }
     */
 
-    /*
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Delete the row from the data source
+            students.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
 
     /*
     // Override to support rearranging the table view.
@@ -95,9 +93,7 @@ class StudentsTableViewController: UITableViewController {
         if segue.identifier == "showMarks" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let destinationController = segue.destinationViewController as! MarksTableViewController
-                if let student = students[indexPath.row] as? Student {
-                    destinationController.marks = student.marks
-                }
+                destinationController.marks = students[indexPath.row].marks as! [Mark]
             }
         }
     }

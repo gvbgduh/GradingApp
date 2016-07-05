@@ -11,10 +11,11 @@ import Foundation
 class Student {
     var firstName = ""
     var lastName = ""
-    var marks = ""
+    var marks = []
     
-    init(firstName:String, lastName: String) {
+    init(firstName:String, lastName:String, marks:Array<Mark>) {
         self.firstName = firstName
         self.lastName = lastName
+        self.marks = marks
     }
 }

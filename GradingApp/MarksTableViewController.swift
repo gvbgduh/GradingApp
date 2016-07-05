@@ -1,5 +1,5 @@
 //
-//  ClassesTableViewController.swift
+//  MarksTableViewController.swift
 //  GradingApp
 //
 //  Created by Георгий Богодухов on 5/07/2016.
@@ -8,82 +8,9 @@
 
 import UIKit
 
-class ClassesTableViewController: UITableViewController {
+class MarksTableViewController: UITableViewController {
     
-    var classes = [
-        GradingClass(
-            name: "Class A",
-            students: [
-                Student(
-                    firstName: "A",
-                    lastName: "A",
-                    marks: [
-                        Mark(subject: "Math", mark: 100),
-                        Mark(subject: "Phys", mark: 97),
-                        Mark(subject: "English", mark: 70),
-                    ]
-                ),
-                Student(
-                    firstName: "B",
-                    lastName: "A",
-                    marks: [
-                        Mark(subject: "Math", mark: 60),
-                        Mark(subject: "Phys", mark: 57),
-                        Mark(subject: "English", mark: 95),
-                    ]
-                ),
-                Student(
-                    firstName: "C",
-                    lastName: "A",
-                    marks: []
-                )
-            ]
-        ),
-        GradingClass(
-            name: "Class B",
-            students: [
-                Student(
-                    firstName: "A",
-                    lastName: "B",
-                    marks: []
-                ),
-                Student(
-                    firstName: "B",
-                    lastName: "B",
-                    marks: []
-                ),
-                Student(
-                    firstName: "C",
-                    lastName: "B",
-                    marks: []
-                )
-            ]
-        ),
-        GradingClass(
-            name: "Class C",
-            students: [
-                Student(
-                    firstName: "A",
-                    lastName: "C",
-                    marks: []
-                ),
-                Student(
-                    firstName: "B",
-                    lastName: "C",
-                    marks: []
-                )
-            ]
-        ),
-        GradingClass(
-            name: "Class D",
-            students: []
-        ),
-        GradingClass(
-            name: "Class F",
-            students: []
-        ),
-    ]
-    
+    var marks = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -109,15 +36,16 @@ class ClassesTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return classes.count
+        return marks.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cellIdentifier = "ClassCell"
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath)
-        
+        let cell = tableView.dequeueReusableCellWithIdentifier("MarkCell", forIndexPath: indexPath)
+
         // Configure the cell...
-        cell.textLabel?.text = classes[indexPath.row].name
+        if let mark = marks[indexPath.row] as? Mark {
+            cell.textLabel?.text = "Subject - \(mark.subject): \(mark.mark)"
+        }
 
         return cell
     }
@@ -157,18 +85,14 @@ class ClassesTableViewController: UITableViewController {
     }
     */
 
+    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        
-        if segue.identifier == "showStudents" {
-            if let indexPath = tableView.indexPathForSelectedRow {
-                let destinationController = segue.destinationViewController as! StudentsTableViewController
-                destinationController.students = classes[indexPath.row].students
-            }
-        }
     }
+    */
+
 }

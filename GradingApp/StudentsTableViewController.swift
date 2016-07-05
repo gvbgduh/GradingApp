@@ -1,5 +1,5 @@
 //
-//  ClassesTableViewController.swift
+//  StudentsTableViewController.swift
 //  GradingApp
 //
 //  Created by Георгий Богодухов on 5/07/2016.
@@ -8,66 +8,9 @@
 
 import UIKit
 
-class ClassesTableViewController: UITableViewController {
+class StudentsTableViewController: UITableViewController {
     
-    var classes = [
-        GradingClass(
-            name: "Class A",
-            students: [
-                Student(
-                    firstName: "A",
-                    lastName: "A"
-                ),
-                Student(
-                    firstName: "B",
-                    lastName: "A"
-                ),
-                Student(
-                    firstName: "C",
-                    lastName: "A"
-                )
-            ]
-        ),
-        GradingClass(
-            name: "Class B",
-            students: [
-                Student(
-                    firstName: "A",
-                    lastName: "B"
-                ),
-                Student(
-                    firstName: "B",
-                    lastName: "B"
-                ),
-                Student(
-                    firstName: "C",
-                    lastName: "B"
-                )
-            ]
-        ),
-        GradingClass(
-            name: "Class C",
-            students: [
-                Student(
-                    firstName: "A",
-                    lastName: "C"
-                ),
-                Student(
-                    firstName: "B",
-                    lastName: "C"
-                )
-            ]
-        ),
-        GradingClass(
-            name: "Class D",
-            students: []
-        ),
-        GradingClass(
-            name: "Class F",
-            students: []
-        ),
-    ]
-    
+    var students = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,15 +36,17 @@ class ClassesTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return classes.count
+        return students.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cellIdentifier = "Cell"
+        let cellIdentifier = "StudentCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath)
-        
+
         // Configure the cell...
-        cell.textLabel?.text = classes[indexPath.row].name
+        if let student = students[indexPath.row] as? Student {
+            cell.textLabel?.text = "Student: \(student.firstName) \(student.lastName)"
+        }
 
         return cell
     }
@@ -141,18 +86,14 @@ class ClassesTableViewController: UITableViewController {
     }
     */
 
+    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        
-        if segue.identifier == "showStudents" {
-            if let indexPath = tableView.indexPathForSelectedRow {
-                let destinationController = segue.destinationViewController as! StudentsTableViewController
-                destinationController.students = classes[indexPath.row].students
-            }
-        }
     }
+    */
+
 }

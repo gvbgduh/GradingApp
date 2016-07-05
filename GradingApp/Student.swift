@@ -11,7 +11,7 @@ import Foundation
 class Student {
     var firstName = ""
     var lastName = ""
-    var mark = ""
+    var marks = ""
     
     init(firstName:String, lastName: String) {
         self.firstName = firstName

@@ -7,14 +7,12 @@
 //
 
 import Foundation
+import CoreData
 
 
-class Mark {
-    var subject = ""
-    var mark = 0
+class Mark:NSManagedObject {
+    @NSManaged var subject:String
+    @NSManaged var mark:Int16
     
-    init(subject: String, mark: Int) {
-        self.subject = subject
-        self.mark = mark
-    }
+    @NSManaged var student:Student
 }

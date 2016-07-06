@@ -7,15 +7,20 @@
 //
 
 import Foundation
+import CoreData
 
-class Student {
-    var firstName = ""
-    var lastName = ""
-    var marks = []
+
+class Student:NSManagedObject {
+    @NSManaged var firstName:String
+    @NSManaged var lastName:String
     
-    init(firstName:String, lastName:String, marks:[Mark]) {
-        self.firstName = firstName
-        self.lastName = lastName
-        self.marks = marks
-    }
+    @NSManaged var gradingUnit:GradingUnit
+    
+    @NSManaged var marks:NSSet
+    
+    @NSManaged func addMarksObject(mark: Mark)
+    @NSManaged func removeMarksObject(mark: Mark)
+    @NSManaged func addMarks(marks: NSSet)
+    @NSManaged func removeMarks(marks: NSSet)
 }
+

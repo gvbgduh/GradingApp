@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import CoreData
 
-class StudentsTableViewController: UITableViewController {
+
+class StudentsTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
     var students: [Student] = []
-    var className = ""
+    
+    var gradingUnit:GradingUnit!
     
     @IBAction func unwindToHomeScreen(segue:UIStoryboardSegue) {}
 
@@ -26,7 +29,9 @@ class StudentsTableViewController: UITableViewController {
         
         // Remove the title of the back button
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
-        title = className
+        title = gradingUnit.unitName
+        
+        students = gradingUnit.students.allObjects as! [Student]
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,6 +49,12 @@ class StudentsTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return students.count
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        students = gradingUnit.students.allObjects as! [Student]
+        tableView.reloadData()
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -69,8 +80,19 @@ class StudentsTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Delete the row from the data source
-            students.removeAtIndex(indexPath.row)
+            if let managedObjectContext = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext {
+                managedObjectContext.deleteObject(students[indexPath.row])
+                students.removeAtIndex(indexPath.row)
+                
+                do {
+                    try managedObjectContext.save()
+                } catch {
+                    print(error)
+                }
+            }
+            
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
@@ -100,9 +122,12 @@ class StudentsTableViewController: UITableViewController {
         if segue.identifier == "showMarks" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let destinationController = segue.destinationViewController as! MarksTableViewController
-                destinationController.marks = students[indexPath.row].marks as! [Mark]
+//                destinationController.marks = students[indexPath.row].marks as! [Mark]
                 destinationController.studentName = "\(students[indexPath.row].firstName) \(students[indexPath.row].lastName)"
             }
+        } else if segue.identifier == "addStudent" {
+            let destinationController = segue.destinationViewController as! AddStudentViewController
+            destinationController.gradingUnit = gradingUnit
         }
     }
 }

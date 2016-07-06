@@ -7,82 +7,14 @@
 //
 
 import UIKit
+import CoreData
 
-class ClassesTableViewController: UITableViewController {
+
+class ClassesTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
-    var classes = [
-        GradingClass(
-            name: "Class A",
-            students: [
-                Student(
-                    firstName: "A",
-                    lastName: "A",
-                    marks: [
-                        Mark(subject: "Math", mark: 100),
-                        Mark(subject: "Phys", mark: 97),
-                        Mark(subject: "English", mark: 70),
-                    ]
-                ),
-                Student(
-                    firstName: "B",
-                    lastName: "A",
-                    marks: [
-                        Mark(subject: "Math", mark: 60),
-                        Mark(subject: "Phys", mark: 57),
-                        Mark(subject: "English", mark: 95),
-                    ]
-                ),
-                Student(
-                    firstName: "C",
-                    lastName: "A",
-                    marks: []
-                )
-            ]
-        ),
-        GradingClass(
-            name: "Class B",
-            students: [
-                Student(
-                    firstName: "A",
-                    lastName: "B",
-                    marks: []
-                ),
-                Student(
-                    firstName: "B",
-                    lastName: "B",
-                    marks: []
-                ),
-                Student(
-                    firstName: "C",
-                    lastName: "B",
-                    marks: []
-                )
-            ]
-        ),
-        GradingClass(
-            name: "Class C",
-            students: [
-                Student(
-                    firstName: "A",
-                    lastName: "C",
-                    marks: []
-                ),
-                Student(
-                    firstName: "B",
-                    lastName: "C",
-                    marks: []
-                )
-            ]
-        ),
-        GradingClass(
-            name: "Class D",
-            students: []
-        ),
-        GradingClass(
-            name: "Class F",
-            students: []
-        ),
-    ]
+    var fetchResultController:NSFetchedResultsController!
+    
+    var gradingUnits:[GradingUnit] = []
     
     @IBAction func unwindToHomeScreen(segue:UIStoryboardSegue) {}
 
@@ -97,6 +29,23 @@ class ClassesTableViewController: UITableViewController {
         
         // Remove the title of the back button
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+        
+        // Fetch data for the view
+        let fetchRequest = NSFetchRequest(entityName: "GradingUnit")
+        let sortDescriptor = NSSortDescriptor(key: "unitName", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        if let managedObjectContext = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext {
+            fetchResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+            fetchResultController.delegate = self
+            
+            do {
+                try fetchResultController.performFetch()
+                gradingUnits = fetchResultController.fetchedObjects as! [GradingUnit]
+            } catch {
+                print(error)
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -113,7 +62,7 @@ class ClassesTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return classes.count
+        return gradingUnits.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -121,9 +70,39 @@ class ClassesTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath)
         
         // Configure the cell...
-        cell.textLabel?.text = classes[indexPath.row].name
+        cell.textLabel?.text = gradingUnits[indexPath.row].unitName
 
         return cell
+    }
+    
+    // Updating the table view from Core Date
+    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+        tableView.beginUpdates()
+    }
+    
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+        switch type {
+        case .Insert:
+            if let _newIndexPath = newIndexPath {
+                tableView.insertRowsAtIndexPaths([_newIndexPath], withRowAnimation: .Fade)
+            }
+        case .Delete:
+            if let _indexPath = indexPath {
+                tableView.deleteRowsAtIndexPaths([_indexPath], withRowAnimation: .Fade)
+            }
+        case .Update:
+            if let _indexPath = indexPath {
+                tableView.reloadRowsAtIndexPaths([_indexPath], withRowAnimation: .Fade)
+            }
+        default:
+            tableView.reloadData()
+        }
+        
+        gradingUnits = controller.fetchedObjects as! [GradingUnit]
+    }
+    
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        tableView.endUpdates()
     }
 
     /*
@@ -138,11 +117,19 @@ class ClassesTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Delete the row from the data source
-            classes.removeAtIndex(indexPath.row)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            if let managedObjectContext = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext {
+                let gradingUnitToDelete = self.fetchResultController.objectAtIndexPath(indexPath) as! GradingUnit
+                managedObjectContext.deleteObject(gradingUnitToDelete)
+                
+                do {
+                    try managedObjectContext.save()
+                } catch {
+                    print(error)
+                }
+            }
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
 
     /*
@@ -170,8 +157,7 @@ class ClassesTableViewController: UITableViewController {
         if segue.identifier == "showStudents" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let destinationController = segue.destinationViewController as! StudentsTableViewController
-                destinationController.students = classes[indexPath.row].students as! [Student]
-                destinationController.className = classes[indexPath.row].name
+                destinationController.gradingUnit = gradingUnits[indexPath.row]
             }
         }
     }

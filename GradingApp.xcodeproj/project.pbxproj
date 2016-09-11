@@ -14,7 +14,6 @@
 		7ADB84181D2B11FE000FDD54 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7ADB84171D2B11FE000FDD54 /* Assets.xcassets */; };
 		7ADB841B1D2B11FE000FDD54 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7ADB84191D2B11FE000FDD54 /* LaunchScreen.storyboard */; };
 		7ADB84231D2B1381000FDD54 /* ClassesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADB84221D2B1381000FDD54 /* ClassesTableViewController.swift */; };
-		7ADB84271D2B1555000FDD54 /* GradingClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADB84261D2B1555000FDD54 /* GradingClass.swift */; };
 		7ADB84291D2B1602000FDD54 /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADB84281D2B1602000FDD54 /* Student.swift */; };
 		7ADB842B1D2B22EA000FDD54 /* StudentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADB842A1D2B22EA000FDD54 /* StudentsTableViewController.swift */; };
 		7ADB842F1D2BA3D3000FDD54 /* Mark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADB842E1D2BA3D3000FDD54 /* Mark.swift */; };
@@ -22,6 +21,7 @@
 		7ADB84361D2C652B000FDD54 /* GradingUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADB84351D2C652B000FDD54 /* GradingUnit.swift */; };
 		7ADB84381D2C6F4A000FDD54 /* AddClassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADB84371D2C6F4A000FDD54 /* AddClassViewController.swift */; };
 		7ADB843A1D2D11E8000FDD54 /* AddStudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADB84391D2D11E8000FDD54 /* AddStudentViewController.swift */; };
+		7ADB843C1D2FA58E000FDD54 /* AddMarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADB843B1D2FA58E000FDD54 /* AddMarkViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,7 +34,6 @@
 		7ADB841A1D2B11FE000FDD54 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7ADB841C1D2B11FE000FDD54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7ADB84221D2B1381000FDD54 /* ClassesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassesTableViewController.swift; sourceTree = "<group>"; };
-		7ADB84261D2B1555000FDD54 /* GradingClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradingClass.swift; sourceTree = "<group>"; };
 		7ADB84281D2B1602000FDD54 /* Student.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
 		7ADB842A1D2B22EA000FDD54 /* StudentsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentsTableViewController.swift; sourceTree = "<group>"; };
 		7ADB842E1D2BA3D3000FDD54 /* Mark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mark.swift; sourceTree = "<group>"; };
@@ -42,6 +41,7 @@
 		7ADB84351D2C652B000FDD54 /* GradingUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradingUnit.swift; sourceTree = "<group>"; };
 		7ADB84371D2C6F4A000FDD54 /* AddClassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddClassViewController.swift; sourceTree = "<group>"; };
 		7ADB84391D2D11E8000FDD54 /* AddStudentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStudentViewController.swift; sourceTree = "<group>"; };
+		7ADB843B1D2FA58E000FDD54 /* AddMarkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMarkViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +82,6 @@
 				7ADB841C1D2B11FE000FDD54 /* Info.plist */,
 				7ADB84141D2B11FE000FDD54 /* GradingApp.xcdatamodeld */,
 				7ADB84221D2B1381000FDD54 /* ClassesTableViewController.swift */,
-				7ADB84261D2B1555000FDD54 /* GradingClass.swift */,
 				7ADB84351D2C652B000FDD54 /* GradingUnit.swift */,
 				7ADB84281D2B1602000FDD54 /* Student.swift */,
 				7ADB842A1D2B22EA000FDD54 /* StudentsTableViewController.swift */,
@@ -90,6 +89,7 @@
 				7ADB84301D2BA9D8000FDD54 /* MarksTableViewController.swift */,
 				7ADB84371D2C6F4A000FDD54 /* AddClassViewController.swift */,
 				7ADB84391D2D11E8000FDD54 /* AddStudentViewController.swift */,
+				7ADB843B1D2FA58E000FDD54 /* AddMarkViewController.swift */,
 			);
 			path = GradingApp;
 			sourceTree = "<group>";
@@ -170,13 +170,13 @@
 				7ADB84311D2BA9D9000FDD54 /* MarksTableViewController.swift in Sources */,
 				7ADB84361D2C652B000FDD54 /* GradingUnit.swift in Sources */,
 				7ADB84231D2B1381000FDD54 /* ClassesTableViewController.swift in Sources */,
+				7ADB843C1D2FA58E000FDD54 /* AddMarkViewController.swift in Sources */,
 				7ADB84291D2B1602000FDD54 /* Student.swift in Sources */,
 				7ADB84161D2B11FE000FDD54 /* GradingApp.xcdatamodeld in Sources */,
 				7ADB84101D2B11FE000FDD54 /* ViewController.swift in Sources */,
 				7ADB843A1D2D11E8000FDD54 /* AddStudentViewController.swift in Sources */,
 				7ADB840E1D2B11FE000FDD54 /* AppDelegate.swift in Sources */,
 				7ADB842B1D2B22EA000FDD54 /* StudentsTableViewController.swift in Sources */,
-				7ADB84271D2B1555000FDD54 /* GradingClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

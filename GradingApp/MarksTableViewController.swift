@@ -7,10 +7,15 @@
 //
 
 import UIKit
+import CoreData
 
-class MarksTableViewController: UITableViewController {
+
+class MarksTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
     var marks:[Mark] = []
+    
+    var student:Student!
+    
     var studentName = ""
     
     @IBAction func unwindToHomeScreen(segue:UIStoryboardSegue) {}
@@ -24,7 +29,9 @@ class MarksTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        title = studentName
+        title = "Student: \(student.firstName) \(student.lastName)"
+        
+        marks = student.marks.allObjects as! [Mark]
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,13 +50,19 @@ class MarksTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return marks.count
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        marks = student.marks.allObjects as! [Mark]
+        tableView.reloadData()
+    }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("MarkCell", forIndexPath: indexPath)
 
         // Configure the cell...
         let mark = marks[indexPath.row]
-        cell.textLabel?.text = "Subject - \(mark.subject): \(mark.mark)"
+        cell.textLabel?.text = "\(mark.subject): \(mark.mark)"
 
         return cell
     }
@@ -70,8 +83,19 @@ class MarksTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Delete the row from the data source
-            marks.removeAtIndex(indexPath.row)
+            if let managedObjectContext = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext {
+                managedObjectContext.deleteObject(marks[indexPath.row])
+                marks.removeAtIndex(indexPath.row)
+                
+                do {
+                    try managedObjectContext.save()
+                } catch {
+                    print(error)
+                }
+            }
+            
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
@@ -92,14 +116,16 @@ class MarksTableViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "addMark" {
+            let destinationController = segue.destinationViewController as! AddMarkViewController
+            destinationController.student = student
+        }
     }
-    */
 
 }

@@ -124,6 +124,7 @@ class StudentsTableViewController: UITableViewController, NSFetchedResultsContro
                 let destinationController = segue.destinationViewController as! MarksTableViewController
 //                destinationController.marks = students[indexPath.row].marks as! [Mark]
                 destinationController.studentName = "\(students[indexPath.row].firstName) \(students[indexPath.row].lastName)"
+                destinationController.student = students[indexPath.row]
             }
         } else if segue.identifier == "addStudent" {
             let destinationController = segue.destinationViewController as! AddStudentViewController
